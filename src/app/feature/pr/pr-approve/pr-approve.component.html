@@ -1,0 +1,50 @@
+<app-menu></app-menu>
+<div class='component-content'>
+  <div class='left-half'>
+    <span class='component-title'>[{{title1}}]</span>
+    <a routerLink='/pr/review/' title = 'Back to Request List'>Back to List</a>
+  </div>
+</div>
+<p *ngIf='!request'> Loading ... </p>
+<table class="table table-sm" *ngIf='request'>
+  <tr>
+    <th><a class="btn btn-link font-weight-bold"><u>ID: </u></a> </th>
+    <th><a class="btn btn-link font-weight-bold"><u>Description: </u></a> </th>
+    <th> <a class="btn btn-link font-weight-bold"><u>Status: </u></a> </th>
+    <th><a class="btn btn-link font-weight-bold"><u>Total: </u></a> </th>
+  </tr>
+  <tr>
+    <td> {{ request.id }} </td>
+    <td> {{ request.description }}</td>
+    <td> {{ request.status }} </td>
+    <td> {{ request.total |currency }} </td>
+  </tr>
+</table>
+
+<div class='component-content'>
+  <div class='left-half'>
+    <span class='component-title'>[{{title2}}]</span>
+  </div>
+</div>
+<p *ngIf='!prlis'> "Loading..." </p>
+<table class="table table-sm" *ngIf='prlis'>
+  <tr>
+    <th><a class="btn btn-link font-weight-bold"><u>ID: </u></a> </th>
+    <th><a class="btn btn-link font-weight-bold"><u>Product: </u></a> </th>
+    <th> <a class="btn btn-link font-weight-bold"><u>Quantity: </u></a> </th>
+    <th><a class="btn btn-link font-weight-bold"><u>Price: </u></a> </th>
+    <th><a class="btn btn-link font-weight-bold"><u>Line Total: </u></a> </th>
+  </tr>
+  <tr *ngFor='let prli of prlis'> 
+    <td> {{ prli.id}} </td>
+    <td> {{ prli.product.name }} </td>
+    <td> {{ prli.quantity}} </td>
+    <td> {{ prli.product.price }} </td>
+    <td> {{ prli.quantity * prli.product.price |currency }}</td>
+  </tr>
+  </table>
+
+  <input [(ngModel)] = 'request.reasonForRejection' placeholder="Reason for Rejection" name='Rejection' type='text'>
+  <button *ngIf = '!request.reasonForRejection' (click)='approve()' class='btn btn-success'>Approve</button>
+  <button *ngIf = 'request.reasonForRejection'type='submit' (click)='reject()' class='btn btn-danger'>Reject</button>
+

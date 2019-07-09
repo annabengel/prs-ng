@@ -1,0 +1,33 @@
+<app-menu></app-menu>
+<div class='component-content'>
+  <div class='left-half'>
+    <span class='component-title'>[{{title}}]</span>
+  </div>
+</div>
+<p *ngIf='!requests'> Loading ... </p>
+<table class = "table table-sm" *ngIf='requests'>
+  <tr>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold" ><u>Id</u></a> </th>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold" ><u>User</u></a> </th>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold" ><u>Description</u></a> </th>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold" ><u>Status</u></a> </th>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold" ><u>Total</u></a> </th>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold" ><u>Submitted Date</u></a> </th>
+    <th class="table-secondary btn-link"> Action </th>
+
+  </tr>
+  <tr *ngFor='let request of requests'> 
+    <td> {{ request.id}} </td>
+    <td> {{ request.user.firstName }} {{ request.user.lastName }} </td>
+    <td> {{ request.description}} </td>
+    <td> {{ request.status }} </td>
+    <td> {{ request.total |currency }} </td>
+    <td> {{ request.submittedDate |date:long}} </td>
+    <td class='actions'>
+        <a routerLink='/pr/approve/{{request.id}}'><img src='assets/review.png' width='20' height='20'
+            title='Detail'></a>
+
+      </td>
+
+  </tr>
+</table>

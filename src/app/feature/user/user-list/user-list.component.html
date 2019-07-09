@@ -1,0 +1,58 @@
+<app-menu></app-menu>
+<div class='component-content'>
+  <div class='left-half'>
+    <span class='component-title'>[{{title}}]</span>
+    <span>
+      <a routerLink='/user/create'>
+        <img id='createnew' width='20' height='20' src='assets/add-icon.png' title='Add New'>
+      </a>
+    </span>
+  </div>
+</div>
+<p *ngIf='!users'> Loading ... </p>
+<table class="table table-sm" *ngIf='users'>
+  <tr id='header'>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"><u>Id</u></a> </th>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"><u>UserName</u></a> </th>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"><u>Name</u></a> </th>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"><u>Phone</u></a> </th>
+    <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"><u>Email</u></a> </th>
+    <th class="table-secondary btn-link"> Privilege </th>
+    <th class="table-secondary btn-link"> Action </th>
+  </tr>
+  <tr *ngFor='let user of users'>
+    <td> {{ user.id}} </td>
+    <td> {{ user.userName}} </td>
+    <td> {{user.lastName}}, {{user.firstName}} </td>
+    <td> {{ user.phoneNumber}} </td>
+    <td> {{ user.email}} </td>
+    <td> {{ user.isReviewer?"Rvw" : ""}} | {{ user.isAdmin?"Admin" : ""}} </td>
+    <td class='actions'>
+      <a routerLink='/user/detail/{{user.id}}'><img src='assets/details.png' width='20' height='20' 
+        title='Detail'></a>
+      <a routerLink='/user/edit/{{user.id}}'><img src='assets/pencil-icon.png' width='20' height='20' 
+        title='Edit'></a>
+    </td>
+
+  </tr>
+</table>
+
+<script>
+// When the user scrolls the page, execute myFunction 
+window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("header");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
